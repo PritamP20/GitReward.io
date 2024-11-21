@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git Reward - Progress</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1E194A;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: center;
+      background-color: #444;
+      padding: 10px 0;
+      gap: 20px;
+    }
+
+    .nav-bar a {
+      text-decoration: none;
+      color: #FFF;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 20px;
+      background-color: #77787E;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-bar a:hover {
+      background-color: #F8DA69;
+      color: #333;
+    }
+
+    .header {
+      text-align: center;
+      margin: 30px 0;
+      flex-grow: 0;
+    }
+
+    .header h1 {
+      font-size: 40px;
+      font-family: "Courier New", Courier, monospace;
+      color: #C0C0FF;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .progress-container {
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      flex-grow: 1;
+      padding: 20px 0;
+    }
+
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .progress-label {
+      flex: 1;
+      font-size: 20px;
+      color: #F8DA69;
+      font-weight: bold;
+    }
+
+    .progress-track {
+      flex: 3;
+      height: 20px;
+      background-color: #555;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background-color: #00FFC6;
+      transition: width 0.3s ease;
+      border-radius: 10px;
+    }
+
+    /* Add some responsiveness */
+    @media (max-width: 768px) {
+      .nav-bar {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .progress-container {
+        width: 90%;
+      }
+
+      .header h1 {
+        font-size: 32px;
+      }
+
+      .progress-bar {
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="nav-bar">
+    <a href="projects.html">PROJECT</a>
+    <a href="progress.html">PROGRESS</a>
+    <a href="badges.html">BADGES</a>
+    <a href="leaderboard.html">LEADERBOARD</a>
+    <a href="rewards.html">REWARDS</a>
+  </div>
+
+  <div class="header">
+    <h1>PROGRESS</h1>
+  </div>
+
+  <div class="progress-container">
+    <!-- EsProc Progress -->
+    <div class="progress-bar">
+      <span class="progress-label">EsProc</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="esproc-progress" style="width: 25%;"></div>
+      </div>
+    </div>
+    <!-- AppWrite Progress -->
+    <div class="progress-bar">
+      <span class="progress-label">AppWrite</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="appwrite-progress" style="width: 50%;"></div>
+      </div>
+    </div>
+    <!-- Biodrop Progress -->
+    <div class="progress-bar">
+      <span class="progress-label">Biodrop</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="biodrop-progress" style="width: 35%;"></div>
+      </div>
+    </div>
+    <!-- Blitz Progress -->
+    <div class="progress-bar">
+      <span class="progress-label">Blitz</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="blitz-progress" style="width: 75%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Example dynamic progress values
+    let progressData = {
+      esproc: 45,  // EsProc progress in percentage
+      appwrite: 70,  // AppWrite progress in percentage
+      biodrop: 30,  // Biodrop progress in percentage
+      blitz: 90,  // Blitz progress in percentage
+    };
+
+    // Function to update the progress bars
+    function updateProgressBars() {
+      document.getElementById('esproc-progress').style.width = progressData.esproc + '%';
+      document.getElementById('appwrite-progress').style.width = progressData.appwrite + '%';
+      document.getElementById('biodrop-progress').style.width = progressData.biodrop + '%';
+      document.getElementById('blitz-progress').style.width = progressData.blitz + '%';
+    }
+
+    // Update progress bars when the page loads
+    window.onload = updateProgressBars;
+  </script>
+</body>
+</html>

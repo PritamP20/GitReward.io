@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git Reward Login & Sign Up</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1E194A;
+      color: #FFFFFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      background-color: #1E194A;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      font-size: 36px;
+      font-family: "Courier New", Courier, monospace;
+      color: #C0C0FF;
+      margin-bottom: 20px;
+    }
+    p.description {
+      font-size: 14px;
+      color: #D0D0D0;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    label {
+      font-size: 14px;
+      color: #D0D0D0;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="url"] {
+      width: 100%;
+      padding: 15px;
+      font-size: 14px;
+      background-color: #77787E;
+      color: #FFF;
+      border: none;
+      border-radius: 8px;
+    }
+    .btn {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      background-color: #F8DA69;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #C0C0C0;
+    }
+    .footer a {
+      color: #F8DA69;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .sign-up-form {
+      display: none;
+    }
+    .error {
+      color: #FF7070;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+    .success {
+      color: #70FF70;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Git Reward</h1>
+
+    <!-- Sign-In Form -->
+    <div class="sign-in-form">
+      <p class="description">
+        Earn rewards as you tackle engaging challenges and projects. 
+        Join our community, track your progress, and unlock achievements 
+        on your coding journey. Start coding for rewards today!
+      </p>
+      <form id="signInForm">
+        <div class="form-group">
+          <label for="signInEmail">Email:</label>
+          <input type="email" id="signInEmail" placeholder="name@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="signInPassword">Password:</label>
+          <input type="password" id="signInPassword" placeholder="password" required>
+        </div>
+        <button type="submit" class="btn">Sign In</button>
+      </form>
+      <div id="signInError" class="error"></div>
+      <div class="footer">
+        Don’t have an account? <a onclick="showSignUp()">Sign up</a>
+      </div>
+    </div>
+
+    <!-- Sign-Up Form -->
+    <div class="sign-up-form">
+      <form id="signUpForm">
+        <div class="form-group">
+          <label for="signUpName">Full Name:</label>
+          <input type="text" id="signUpName" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="signUpEmail">Email:</label>
+          <input type="email" id="signUpEmail" placeholder="name@gmail.com" required>
+        </div>
+        <div class="form-group">
+          <label for="signUpPassword">Password:</label>
+          <input type="password" id="signUpPassword" placeholder="Create a password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password:</label>
+          <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+        </div>
+        <div class="form-group">
+          <label for="githubLink">GitHub Link:</label>
+          <input type="url" id="githubLink" placeholder="https://github.com/username">
+        </div>
+        <div class="form-group">
+          <label for="leetcodeLink">LeetCode Link:</label>
+          <input type="url" id="leetcodeLink" placeholder="https://leetcode.com/username">
+        </div>
+        <button type="submit" class="btn">Sign Up</button>
+      </form>
+      <div id="signUpError" class="error"></div>
+      <div id="signUpSuccess" class="success"></div>
+      <div class="footer">
+        Already have an account? <a onclick="showSignIn()">Sign in</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const users = {}; // Mock database for storing users
+
+    function showSignUp() {
+      document.querySelector('.sign-in-form').style.display = 'none';
+      document.querySelector('.sign-up-form').style.display = 'block';
+      document.getElementById('signInError').textContent = '';
+    }
+
+    function showSignIn() {
+      document.querySelector('.sign-up-form').style.display = 'none';
+      document.querySelector('.sign-in-form').style.display = 'block';
+      document.getElementById('signUpError').textContent = '';
+      document.getElementById('signUpSuccess').textContent = '';
+    }
+
+    document.getElementById('signInForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const email = document.getElementById('signInEmail').value;
+      const password = document.getElementById('signInPassword').value;
+
+      if (!users[email]) {
+        document.getElementById('signInError').textContent = 'Account does not exist. Please sign up.';
+      } else if (users[email] !== password) {
+        document.getElementById('signInError').textContent = 'Incorrect password. Please try again.';
+      } else {
+        window.location.href = 'projects.html'; // Redirect on successful sign-in
+      }
+    });
+
+    document.getElementById('signUpForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const name = document.getElementById('signUpName').value;
+      const email = document.getElementById('signUpEmail').value;
+      const password = document.getElementById('signUpPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (users[email]) {
+        document.getElementById('signUpError').textContent = 'Email already exists. Please sign in.';
+      } else if (password !== confirmPassword) {
+        document.getElementById('signUpError').textContent = 'Passwords do not match.';
+      } else {
+        users[email] = password;
+        document.getElementById('signUpSuccess').textContent = 'Sign-up successful! Please sign in.';
+        document.getElementById('signUpError').textContent = '';
+      }
+    });
+  </script>
+</body>
+</html>
